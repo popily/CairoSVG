@@ -448,7 +448,7 @@ class PSSurface(Surface):
 
 class PNGSurface(Surface):
     """A surface that writes in PNG format."""
-    device_units_per_user_units = 1
+    device_units_per_user_units = 2
 
     def _create_surface(self, width, height):
         """Create and return ``(cairo_surface, width, height)``."""

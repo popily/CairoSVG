@@ -103,13 +103,16 @@ def get_declarations(rule):
 
 def match_selector(rule, tree):
     """Yield the ``(element, specificity)`` in ``tree`` matching ``rule``."""
-    selector_list = cssselect.parse(rule.selector.as_css())
-    translator = cssselect.GenericTranslator()
-    for selector in selector_list:
-        if not selector.pseudo_element:
-            specificity = selector.specificity()
-            for element in tree.xpath(translator.selector_to_xpath(selector)):
-                yield element, specificity
+    try:
+        selector_list = cssselect.parse(rule.selector.as_css())
+        translator = cssselect.GenericTranslator()
+        for selector in selector_list:
+            if not selector.pseudo_element:
+                specificity = selector.specificity()
+                for element in tree.xpath(translator.selector_to_xpath(selector)):
+                    yield element, specificity
+    except:
+        pass
 
 
 def apply_stylesheets(tree):
